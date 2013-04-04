@@ -11,7 +11,7 @@ public class GPACalculator {
     
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        text("Assalamualaikum\nThis is GPA Calculator\nHow to use it?\n1.Insert number of subject you take.\n2.Insert the credit hours and your grade\n3.Calculate begin. And your pointer will show up\n");
+        text("============\nThis is GPA Calculator\nHow to use it?\n1.Insert number of subject you take.\n2.Insert the credit hours and your grade\n3.Calculate begin. And your pointer will show up\n============\n");
         
         
         text("\nInsert the number of subjects you take/= \n");
