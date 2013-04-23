@@ -1,0 +1,79 @@
+
+
+library ieee;
+use ieee.std_logic_1164.all;
+
+entity TOPFULLADDER is
+    port (
+
+a0_in: in std_logic;
+a1_in: in std_logic;
+a2_in: in std_logic;
+a3_in: in std_logic;
+b0_in: in std_logic;
+b1_in: in std_logic;
+b2_in: in std_logic;
+b3_in: in std_logic;
+c_in: in std_logic;
+addsub_in: in std_logic;
+sum0_out: out std_logic;
+sum1_out: out std_logic;
+sum2_out: out std_logic;
+sum3_out: out std_logic
+c_out: out std_logic;
+
+    );
+
+end TOPFULLADDER;
+
+
+architecture STRUCTURAL of TOPFULLADDER is
+
+
+component FULLADDER is
+port (
+		a_in,
+		b_in,
+       c_in,
+	 	s_out,
+        c_out
+);
+
+end component;
+
+component  INV is
+
+port (
+	
+	   x_in,
+	   y_in,
+	   z_out
+
+);
+
+
+signal s_c0: std_logic;
+signal s_c1: std_logic;
+signal s_c2: std_logic;
+signal s_as0: std_logic;
+signal s_as1: std_logic;
+signal s_as2: std_logic;
+signal s_as3: std_logic;
+signal s_cin: std_logic;
+signal s_cout: std_logic;
+
+begin
+
+FA0: FULLADDER port map (a_in=>a0_in, b_in=>s_as0, c_in=>s_cin, c_out=>s_c0, s_out=>sum0_out);
+FA1: FULLADDER port map (a_in=>a1_in, b_in=>s_as1, c_in=>s_c0, c_out=>s_c1, s_out=>sum1_out);
+FA2: FULLADDER port map (a_in=>a2_in, b_in=>s_as2, c_in=>s_c1, c_out=>s_c2, s_out=>sum2_out);
+FA3: FULLADDER port map (a_in=>a3_in, b_in=>s_as3, c_in=>s_c2, c_out=>s_cout, s_out=>sum3_out);
+
+ADS: INV port map  (	   x_in=>b0_in,	 y_in=>addsub_in, z_out=>s_as0);
+ADS1: INV port map  (	   x_in=>b1_in,	 y_in=>addsub_in, z_out=>s_as1);
+ADS2: INV port map  (	   x_in=>b2_in,	 y_in=>addsub_in, z_out=>s_as2);
+ADS3: INV port map  (	   x_in=>b3_in,	 y_in=>addsub_in, z_out=>s_as3);
+
+
+
+end STRUCTURAL;
